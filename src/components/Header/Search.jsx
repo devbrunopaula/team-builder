@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
 
+// Material UI Theme Styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

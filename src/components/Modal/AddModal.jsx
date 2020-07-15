@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -42,14 +42,15 @@ function AddMemberModal({ toggle }) {
     email: '',
   }
 
-  const [alertOpen, setAlertOpen] = useState(false)
+  const toggleStatus = useSelector((state) => state.toggle)
+  const [alertOpen, setAlertOpen] = useState('')
   const [formState, setFormState] = useState(defaultState)
   const [errors, setErrors] = useState(defaultState)
   const dispatch = useDispatch()
   const classes = useStyles()
   //Redux
-  const toggleStatus = useSelector((state) => state)
 
+  console.log(toggleStatus.addMembersModal)
   //formState schema
   let formSchema = yup.object().shape({
     name: yup.string().required('Please provide a full name.'),
@@ -60,7 +61,7 @@ function AddMemberModal({ toggle }) {
     title: yup.string().required('Please enter your company title.'),
   })
 
-  const handleClickOpen = () => {
+  const handleClickOpen = ({ toogle }) => {
     // if (toggleStatus.addMembersModal) {
     //   console.log('status true')
     // }
@@ -76,7 +77,6 @@ function AddMemberModal({ toggle }) {
       ...formState,
       [event.target.name]: event.target.value,
     })
-    validateChange(event)
   }
 
   const handleSave = (e) => {
@@ -88,26 +88,16 @@ function AddMemberModal({ toggle }) {
     console.log('form submitted!')
   }
 
-  const validateChange = (e) => {
-    //this allows react to keep the event object to play nice with async op
-    e.persist()
-
-    yup
-      .reach(formSchema, e.target.name)
-      .validate(e.target.value)
-      .then((valid) =>
-        setErrors({
-          ...errors,
-          [e.target.name]: '',
-        })
-      )
-      .catch((error) =>
-        setErrors({
-          ...errors,
-          [e.target.name]: error.errors[0],
-        })
-      )
+  const getToggleStatus = () => {
+    const toggle = toggleStatus.AddMemberModal == true
+    setAlertOpen(toggle)
   }
+
+  useEffect(() => {
+    getToggleStatus()
+  }, [alertOpen])
+
+  useEffect(() => {}, [])
 
   return (
     <Dialog
@@ -184,30 +174,3 @@ function AddMemberModal({ toggle }) {
 }
 
 export default AddMemberModal
-
-// <form className={classes.root} Validate autoComplete='off'>
-// <TextField
-//   autoFocus
-//   margin='dense'
-//   id='fullname'
-//   label='Full Name'
-//   type='text'
-//   fullWidth
-// />
-// <TextField
-//   autoFocus
-//   margin='dense'
-//   id='title'
-//   label='Comapny Title'
-//   type='text'
-//   fullWidth
-// />
-// <TextField
-//   autoFocus
-//   margin='dense'
-//   id='name'
-//   label='Email Address'
-//   type='email'
-//   fullWidth
-// />
-// </form>

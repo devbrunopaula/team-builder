@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import CardMedia from '@material-ui/core/CardMedia'
 import Avatar from '@material-ui/core/Avatar'
+import AddMemberModal from '../Modal/AddModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { modalTogglePlus } from '../../redux/Actions'
 
 const useStyles = makeStyles({
   root: {
@@ -36,9 +39,17 @@ export default function SimpleCard({ data }) {
   const classes = useStyles()
   const bull = <span className={classes.bullet}>•</span>
 
-  console.log('card', data)
+  const toggle = useSelector((state) => state.toggle)
+  const dispatch = useDispatch()
+
+  const editHandle = () => {
+    console.log(123)
+    dispatch(modalTogglePlus())
+  }
+
   return (
     <Card className={classes.root}>
+      <AddMemberModal toggle={toggle.AddMemberModal} />
       <CardContent>
         <Avatar
           alt='Remy Sharp'
@@ -56,7 +67,9 @@ export default function SimpleCard({ data }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Learn More</Button>
+        <Button onClick={editHandle} size='small'>
+          Edit
+        </Button>
       </CardActions>
     </Card>
   )

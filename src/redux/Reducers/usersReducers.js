@@ -13,15 +13,6 @@ const initialState = {
   error: '',
 }
 
-// const users = [
-//   {
-//     id: 0,
-//     name: 'Mary Doe',
-//     title: 'Dev ops',
-
-//   },
-// ]
-
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.FETCH_USERS_REQUEST:

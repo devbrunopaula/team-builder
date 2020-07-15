@@ -22,9 +22,9 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <SettingsIcon />
+        <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary='Settings' />
+      <ListItemText primary='Members' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -36,31 +36,13 @@ export const mainListItems = (
       <ListItemIcon>
         <BookIcon />
       </ListItemIcon>
-      <ListItemText primary='Blog' />
+      <ListItemText primary='Admin' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <SettingsIcon />
       </ListItemIcon>
-      <ListItemText primary='Teams' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PublishIcon />
-      </ListItemIcon>
-      <ListItemText primary='Submissions' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <StarIcon />
-      </ListItemIcon>
-      <ListItemText primary='Favourites' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary='Contests' />
+      <ListItemText primary='Settings' />
     </ListItem>
   </div>
 )

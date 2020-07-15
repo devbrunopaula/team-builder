@@ -33,7 +33,7 @@ import { modalTogglePlus, addUsers, deleteUser } from '../../redux/Actions'
 
 // Compoments Import
 import { mainListItems } from './listItems'
-// import MemberHeader from '../../components/Header/MembersHeaders'
+import MemberHeader from '../../components/Header/MembersHeaders'
 // For Switch Theming
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Search from '../Header/Search'
@@ -145,11 +145,13 @@ export default function Dashboard() {
   const [open, setOpen] = useState(false)
   const [darkState, setDarkState] = useState(false)
   const palletType = darkState ? 'dark' : 'light'
-  const mainPrimaryColor = darkState ? '#6c6c6c' : '#2f2c4a'
+  const mainPrimaryColor = darkState ? '#6c6c6c' : '#ff324d'
   const mainSecondaryColor = darkState ? '#181F32' : '#2B2F3A'
 
   const [users, setNewUser] = useState(data.users)
 
+  // Dark Theme &
+  // Material UI Theme Styles
   const darkTheme = createMuiTheme({
     palette: {
       type: palletType,
@@ -165,7 +167,7 @@ export default function Dashboard() {
     },
   })
 
-  //   Modal Toggle
+  //   Modal Toggles
 
   function toggleModal() {
     dispatch(modalTogglePlus())
@@ -179,10 +181,14 @@ export default function Dashboard() {
   const handleDrawerOpen = () => {
     setOpen(true)
   }
+
   const handleDrawerClose = () => {
     setOpen(false)
   }
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+
+  // Add Dummy Data
 
   const newUser = () => {
     const user = {
@@ -198,6 +204,7 @@ export default function Dashboard() {
       id: 2,
       name: 'John Smith',
       title: 'UI / UX',
+      email: 'test@gmail.com',
     }
     dispatch(addUsers(user))
   }
@@ -300,12 +307,16 @@ export default function Dashboard() {
                 </Paper>
               </div>
               <div className='second_heading'>
-                <h4>7 Members</h4>
+                <h4>
+                  {data.length}
+                  {data.length <= 1 ? ' Member' : ' Members'}
+                </h4>
               </div>
             </Paper>
           </Grid>
           <Container maxWidth='lg' className={classes.container}>
             <div className='members_grid'>
+              {/* Mapping Users Card */}
               {data.map((user) => {
                 return (
                   <div>
